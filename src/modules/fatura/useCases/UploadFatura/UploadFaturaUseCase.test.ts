@@ -8,18 +8,15 @@ import FaturaRepository from 'modules/fatura/repository/typeorm/FaturaRepository
 let uploadFatura: UploadFaturaUseCase
 let faturaRepository: FaturaRepository
 
-describe('CreateEmployee', () => {
+describe('UploadFatura', () => {
   beforeAll(async () => {
     try {
       faturaRepository = new FaturaRepository()
       uploadFatura = new UploadFaturaUseCase(faturaRepository)
 
-      if (!typeORMConnection.isInitialized) {
-        await typeORMConnection.initialize()
-        await typeORMConnection.runMigrations()
-      }
+      if (!typeORMConnection.isInitialized) await typeORMConnection.initialize()
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   })
 

@@ -12,13 +12,15 @@ class FaturaRepository implements IFaturaRepository {
     this.repository = typeORMConnection.getRepository(Fatura)
   }
 
-  async upload(dados: IUploadFaturaDTO): Promise<void> {
+  async upload(dados: IUploadFaturaDTO): Promise<Fatura> {
     const fatura = this.repository.create({
       id: crypto.randomUUID(),
       ...dados,
     })
 
     await this.repository.save(fatura)
+
+    return fatura
   }
 }
 

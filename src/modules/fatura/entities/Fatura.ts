@@ -18,12 +18,6 @@ export class Fatura {
   mesVencimento: Date
 
   @Column()
-  numCliente: number
-
-  @Column()
-  numInstalacao: number
-
-  @Column()
   energiaEletricaUnidade: string
 
   @Column()

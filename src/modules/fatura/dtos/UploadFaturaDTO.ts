@@ -1,10 +1,9 @@
 interface IUploadFaturaDTO {
+  idInstalacao: string
   filepath: string
   total: number
   mesReferencia: Date
   mesVencimento: Date
-  numCliente: number
-  numInstalacao: number
   energiaEletricaUnidade: string
   energiaEletricaQuantidade: number
   energiaEletricaPrecoUnidade: number

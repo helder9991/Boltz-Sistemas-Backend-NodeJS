@@ -4,18 +4,25 @@ import PDFParser from 'pdf-parse'
 import type IUploadFaturaDTO from 'modules/fatura/dtos/UploadFaturaDTO'
 import IFaturaRepository from 'modules/fatura/repository/interfaces/IFaturaRepository'
 import formataDataParaJSDate from 'utils/formataDataParaJSDate'
+import IInstalacaoRepository from 'modules/instalacao/repository/interface/IInstalacaoRepository'
+import type Fatura from 'modules/fatura/entities/Fatura'
 
 interface IUploadFaturaParams {
   filepath: string
 }
 
-type IParsedData = Omit<IUploadFaturaDTO, 'filepath'>
+type IParsedData = Omit<IUploadFaturaDTO, 'filepath' | 'idInstalacao'> & {
+  numCliente: number
+  numInstalacao: number
+}
 
 @injectable()
 class UploadFaturaUseCase {
   constructor(
     @inject('FaturaRepository')
     private readonly faturaRepository: IFaturaRepository,
+    @inject('InstalacaoRepository')
+    private readonly instalacaoRepository: IInstalacaoRepository,
   ) {}
 
   formataLinha(line: string): string[] {
@@ -149,17 +156,27 @@ class UploadFaturaUseCase {
     return this.getDadosFatura(linhas)
   }
 
-  async execute({ filepath }: IUploadFaturaParams): Promise<IUploadFaturaDTO> {
+  async execute({ filepath }: IUploadFaturaParams): Promise<Fatura> {
     const dadosFatura = await this.parserPDF(filepath)
-    await this.faturaRepository.upload({
-      ...dadosFatura,
-      filepath,
+
+    let instalacaoExiste = await this.instalacaoRepository.find({
+      numInstalacao: dadosFatura.numInstalacao,
     })
 
-    return {
+    if (instalacaoExiste === null) {
+      instalacaoExiste = await this.instalacaoRepository.create({
+        numCliente: dadosFatura.numCliente,
+        numInstalacao: dadosFatura.numInstalacao,
+      })
+    }
+
+    const fatura = await this.faturaRepository.upload({
       ...dadosFatura,
       filepath,
-    }
+      idInstalacao: instalacaoExiste.id,
+    })
+
+    return fatura
   }
 }
 

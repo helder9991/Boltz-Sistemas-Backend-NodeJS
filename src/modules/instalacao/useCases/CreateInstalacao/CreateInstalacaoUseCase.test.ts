@@ -18,10 +18,6 @@ describe('CreateInstalacao', () => {
     }
   })
 
-  afterAll(async () => {
-    await typeORMConnection.destroy()
-  })
-
   it('Deve ser capaz de criar uma Instalacao', async () => {
     const instalacaoInfo = {
       numCliente: 1,

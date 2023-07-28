@@ -4,24 +4,26 @@ import path from 'path'
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import UploadFaturaUseCase from './UploadFaturaUseCase'
 import FaturaRepository from 'modules/fatura/repository/typeorm/FaturaRepository'
+import InstalacaoRepository from 'modules/instalacao/repository/typeorm/InstalacaoRepository'
 
 let uploadFatura: UploadFaturaUseCase
 let faturaRepository: FaturaRepository
+let instalacaoRepository: InstalacaoRepository
 
 describe('UploadFatura', () => {
   beforeAll(async () => {
     try {
       faturaRepository = new FaturaRepository()
-      uploadFatura = new UploadFaturaUseCase(faturaRepository)
+      instalacaoRepository = new InstalacaoRepository()
+      uploadFatura = new UploadFaturaUseCase(
+        faturaRepository,
+        instalacaoRepository,
+      )
 
       if (!typeORMConnection.isInitialized) await typeORMConnection.initialize()
     } catch (err) {
       console.error(err)
     }
-  })
-
-  afterAll(async () => {
-    await typeORMConnection.destroy()
   })
 
   it('Deve ser capaz de dar upload em uma fatura', async () => {
@@ -36,8 +38,6 @@ describe('UploadFatura', () => {
       total: 147.52,
       mesReferencia: new Date('2023-06-01T03:00:00.000Z'),
       mesVencimento: new Date('2023-06-12T03:00:00.000Z'),
-      numCliente: 7202788969,
-      numInstalacao: 3004298116,
       energiaEletricaUnidade: 'kWh',
       energiaEletricaQuantidade: 100,
       energiaEletricaPrecoUnidade: 0.91380087,
@@ -65,8 +65,6 @@ describe('UploadFatura', () => {
       total: 140.04,
       mesReferencia: new Date('2023-01-01T03:00:00.000Z'),
       mesVencimento: new Date('2023-01-06T03:00:00.000Z'),
-      numCliente: 7202788969,
-      numInstalacao: 3004298116,
       energiaEletricaUnidade: 'kWh',
       energiaEletricaQuantidade: 100,
       energiaEletricaPrecoUnidade: 0.74860466,

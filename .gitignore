@@ -1,6 +1,11 @@
 package-lock.json
 yarn.lock
+.env
+.vscode
 
 build/
-node_modules
-.env
+node_modules/
+src/assets/*
+src/database/db.sqlite
+!src/assets/test-file*.pdf
+coverage

@@ -3,7 +3,7 @@ import type IFaturaRepository from '../interfaces/IFaturaRepository'
 import { type Repository } from 'typeorm'
 import typeORMConnection from 'database/typeorm'
 import Fatura from '../../entities/Fatura'
-import type IUploadFaturaDTO from '../../dtos/UploadFaturaDTO'
+import type IUploadFaturaDTO from '../../dtos/IUploadFaturaDTO'
 import type IFindFaturaDTO from 'modules/fatura/dtos/IFindFaturaDTO'
 
 class FaturaRepository implements IFaturaRepository {

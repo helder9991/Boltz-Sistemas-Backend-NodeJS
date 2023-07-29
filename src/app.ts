@@ -20,6 +20,4 @@ app.use(routes)
 
 app.use(handleErrors)
 
-app.listen(process.env.API_PORT, () => {
-  console.log('🚀 Backend Started.')
-})
+export default app

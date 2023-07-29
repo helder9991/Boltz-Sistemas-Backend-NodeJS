@@ -7,6 +7,7 @@ const config: Config = {
     '^middlewares/(.*)$': ['<rootDir>/src/middlewares/$1'],
     '^utils/(.*)$': ['<rootDir>/src/utils/$1'],
     '^database/(.*)$': ['<rootDir>/src/database/$1'],
+    '^configs/(.*)$': ['<rootDir>/src/configs/$1'],
   },
   coverageDirectory: 'jest/coverage',
   collectCoverageFrom: [

@@ -12,6 +12,7 @@
       "middlewares": ["./src/middlewares/*"],
       "utils": ["./src/utils/*"],
       "database": ["./src/database/*"],
+      "configs": ["./src/configs/*"],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

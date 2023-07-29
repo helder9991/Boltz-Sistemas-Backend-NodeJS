@@ -1,7 +1,7 @@
 import 'reflect-metadata'
-import typeORMConnection from 'database/typeorm'
 import CreateInstalacaoUseCase from './CreateInstalacaoUseCase'
 import InstalacaoRepository from 'modules/instalacao/repository/typeorm/InstalacaoRepository'
+import limpaTabelasNosTestes from 'utils/limpaTabelasNosTestes'
 
 let createInstalacao: CreateInstalacaoUseCase
 let instalacaoRepository: InstalacaoRepository
@@ -12,7 +12,7 @@ describe('CreateInstalacao', () => {
       instalacaoRepository = new InstalacaoRepository()
       createInstalacao = new CreateInstalacaoUseCase(instalacaoRepository)
 
-      if (!typeORMConnection.isInitialized) await typeORMConnection.initialize()
+      await limpaTabelasNosTestes()
     } catch (err) {
       console.error(err)
     }

@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-import typeORMConnection from 'database/typeorm'
 import path from 'path'
 import FaturaRepository from 'modules/fatura/repository/typeorm/FaturaRepository'
 import InstalacaoRepository from 'modules/instalacao/repository/typeorm/InstalacaoRepository'
@@ -7,7 +6,7 @@ import UploadFaturaUseCase, {
   type IUploadFaturaResponse,
 } from '../UploadFatura/UploadFaturaUseCase'
 import DownloadFaturaUseCase from './DownloadFaturaUseCase'
-import Fatura from 'modules/fatura/entities/Fatura'
+import limpaTabelasNosTestes from 'utils/limpaTabelasNosTestes'
 
 let faturaRepository: FaturaRepository
 let instalacaoRepository: InstalacaoRepository
@@ -32,9 +31,8 @@ describe('DownloadFatura', () => {
       )
       downloadFatura = new DownloadFaturaUseCase(faturaRepository)
 
-      if (!typeORMConnection.isInitialized) await typeORMConnection.initialize()
+      await limpaTabelasNosTestes()
 
-      await typeORMConnection.getRepository(Fatura).delete({})
       fatura = await uploadFatura.execute({ filepath })
     } catch (err) {
       console.error(err)

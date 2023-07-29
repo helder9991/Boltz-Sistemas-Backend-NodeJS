@@ -1,12 +1,12 @@
 import 'reflect-metadata'
 import typeORMConnection from 'database/typeorm'
 import path from 'path'
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import UploadFaturaUseCase from './UploadFaturaUseCase'
 import FaturaRepository from 'modules/fatura/repository/typeorm/FaturaRepository'
 import InstalacaoRepository from 'modules/instalacao/repository/typeorm/InstalacaoRepository'
 import Fatura from 'modules/fatura/entities/Fatura'
 import Instalacao from 'modules/instalacao/entities/Instalacao'
+import limpaTabelasNosTestes from 'utils/limpaTabelasNosTestes'
 
 let uploadFatura: UploadFaturaUseCase
 let faturaRepository: FaturaRepository
@@ -22,7 +22,7 @@ describe('UploadFatura', () => {
         instalacaoRepository,
       )
 
-      if (!typeORMConnection.isInitialized) await typeORMConnection.initialize()
+      await limpaTabelasNosTestes()
     } catch (err) {
       console.error(err)
     }

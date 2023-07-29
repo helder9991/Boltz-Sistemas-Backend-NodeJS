@@ -4,6 +4,7 @@ import { type Repository } from 'typeorm'
 import typeORMConnection from 'database/typeorm'
 import Fatura from '../../entities/Fatura'
 import type IUploadFaturaDTO from '../../dtos/UploadFaturaDTO'
+import type IFindFaturaDTO from 'modules/fatura/dtos/IFindFaturaDTO'
 
 class FaturaRepository implements IFaturaRepository {
   private readonly repository: Repository<Fatura>
@@ -19,6 +20,17 @@ class FaturaRepository implements IFaturaRepository {
     })
 
     await this.repository.save(fatura)
+
+    return fatura
+  }
+
+  async find({
+    idInstalacao,
+    mesReferencia,
+  }: IFindFaturaDTO): Promise<Fatura | null> {
+    const fatura = await this.repository.findOne({
+      where: [{ idInstalacao, mesReferencia }],
+    })
 
     return fatura
   }

@@ -5,6 +5,8 @@ import path from 'path'
 import UploadFaturaUseCase from './UploadFaturaUseCase'
 import FaturaRepository from 'modules/fatura/repository/typeorm/FaturaRepository'
 import InstalacaoRepository from 'modules/instalacao/repository/typeorm/InstalacaoRepository'
+import Fatura from 'modules/fatura/entities/Fatura'
+import Instalacao from 'modules/instalacao/entities/Instalacao'
 
 let uploadFatura: UploadFaturaUseCase
 let faturaRepository: FaturaRepository
@@ -24,6 +26,11 @@ describe('UploadFatura', () => {
     } catch (err) {
       console.error(err)
     }
+  })
+
+  beforeEach(() => {
+    typeORMConnection.getRepository(Fatura).delete({})
+    typeORMConnection.getRepository(Instalacao).delete({})
   })
 
   it('Deve ser capaz de dar upload em uma fatura', async () => {
@@ -81,5 +88,19 @@ describe('UploadFatura', () => {
     })
 
     expect(fatura).toHaveProperty('filepath')
+  })
+
+  it('Nao deve ser capaz de dar upload em uma fatura que já foi salva', async () => {
+    const filepath = path.join(
+      path.resolve(__dirname, '..', '..', '..', '..', 'assets'),
+      'test-file1.pdf',
+    )
+
+    await uploadFatura.execute({ filepath })
+
+    await expect(uploadFatura.execute({ filepath })).rejects.toHaveProperty(
+      'message',
+      'Esta fatura ja foi cadastrada',
+    )
   })
 })

@@ -1,4 +1,3 @@
-import typeORMConnection from 'database/typeorm'
 import fs from 'fs'
 import path from 'path'
 
@@ -9,8 +8,6 @@ const dbFilePath = path.join(
 
 export default async (): Promise<void> => {
   try {
-    await typeORMConnection.destroy()
-
     // Verifica se o arquivo db.sqlite existe antes de tentar removê-lo
     if (fs.existsSync(dbFilePath)) {
       fs.unlinkSync(dbFilePath)

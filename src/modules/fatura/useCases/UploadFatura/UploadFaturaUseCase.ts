@@ -6,12 +6,18 @@ import IFaturaRepository from 'modules/fatura/repository/interfaces/IFaturaRepos
 import formataDataParaJSDate from 'utils/formataDataParaJSDate'
 import IInstalacaoRepository from 'modules/instalacao/repository/interface/IInstalacaoRepository'
 import type Fatura from 'modules/fatura/entities/Fatura'
+import AppError from 'utils/AppError'
 
 interface IUploadFaturaParams {
   filepath: string
 }
 
 type IParsedData = Omit<IUploadFaturaDTO, 'filepath' | 'idInstalacao'> & {
+  numCliente: number
+  numInstalacao: number
+}
+
+export type IUploadFaturaResponse = Fatura & {
   numCliente: number
   numInstalacao: number
 }
@@ -156,7 +162,9 @@ class UploadFaturaUseCase {
     return this.getDadosFatura(linhas)
   }
 
-  async execute({ filepath }: IUploadFaturaParams): Promise<Fatura> {
+  async execute({
+    filepath,
+  }: IUploadFaturaParams): Promise<IUploadFaturaResponse> {
     const dadosFatura = await this.parserPDF(filepath)
 
     let instalacaoExiste = await this.instalacaoRepository.find({
@@ -170,13 +178,25 @@ class UploadFaturaUseCase {
       })
     }
 
+    const faturaExiste = await this.faturaRepository.find({
+      idInstalacao: instalacaoExiste.id,
+      mesReferencia: dadosFatura.mesReferencia,
+    })
+
+    if (faturaExiste !== null)
+      throw new AppError('Esta fatura ja foi cadastrada')
+
     const fatura = await this.faturaRepository.upload({
       ...dadosFatura,
       filepath,
       idInstalacao: instalacaoExiste.id,
     })
 
-    return fatura
+    return {
+      ...fatura,
+      numCliente: dadosFatura.numCliente,
+      numInstalacao: dadosFatura.numInstalacao,
+    }
   }
 }
 

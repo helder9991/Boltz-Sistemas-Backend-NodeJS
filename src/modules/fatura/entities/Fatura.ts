@@ -6,6 +6,9 @@ export class Fatura {
   id: string
 
   @Column()
+  idInstalacao?: string
+
+  @Column()
   filepath: string
 
   @Column()

@@ -1,6 +1,7 @@
 import upload from 'configs/multer'
 import { type Request, type Response, Router } from 'express'
 import removeFileOnError from 'middlewares/removeFileOnError'
+import DownloadFaturaController from 'modules/fatura/controllers/DownloadFaturaController'
 import UploadFaturaController from 'modules/fatura/controllers/UploadFaturaController'
 
 const faturaRoutes = Router()
@@ -10,6 +11,10 @@ faturaRoutes.post(
   upload.single('file'),
   removeFileOnError,
   (req: Request, res: Response) => UploadFaturaController.handle(req, res),
+)
+
+faturaRoutes.get('/download/:id', (req: Request, res: Response) =>
+  DownloadFaturaController.handle(req, res),
 )
 
 export default faturaRoutes

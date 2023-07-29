@@ -1,6 +1,7 @@
 interface IFindFaturaDTO {
-  idInstalacao: string
-  mesReferencia: Date
+  id?: string
+  idInstalacao?: string
+  mesReferencia?: Date
 }
 
 export default IFindFaturaDTO

@@ -27,9 +27,10 @@ class FaturaRepository implements IFaturaRepository {
   async find({
     idInstalacao,
     mesReferencia,
+    id,
   }: IFindFaturaDTO): Promise<Fatura | null> {
     const fatura = await this.repository.findOne({
-      where: [{ idInstalacao, mesReferencia }],
+      where: [{ idInstalacao, mesReferencia }, { id }],
     })
 
     return fatura

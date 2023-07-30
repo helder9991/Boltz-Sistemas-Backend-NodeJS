@@ -11,7 +11,7 @@ export class Fatura {
   @Column()
   filepath: string
 
-  @Column()
+  @Column({ type: 'float' })
   total: number
 
   @Column()
@@ -20,67 +20,67 @@ export class Fatura {
   @Column()
   mesVencimento: Date
 
-  @Column()
+  @Column({ type: 'float' })
   energiaEletricaUnidade: string
 
-  @Column()
+  @Column({ type: 'bigint' })
   energiaEletricaQuantidade: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaEletricaPrecoUnidade: number
 
   @Column()
   energiaEletricaValor: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaInjetadaUnidade?: string
 
-  @Column()
+  @Column({ type: 'bigint' })
   energiaInjetadaQuantidade?: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaInjetadaPrecoUnidade?: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaInjetadaValor?: number
 
-  @Column()
+  @Column({ type: 'float' })
   enCompSemICMSUnidade?: string
 
-  @Column()
+  @Column({ type: 'bigint' })
   enCompSemICMSQuantidade?: number
 
-  @Column()
+  @Column({ type: 'float' })
   enCompSemICMSPrecoUnidade?: number
 
-  @Column()
+  @Column({ type: 'float' })
   enCompSemICMSValor?: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaCompensadaUnidade?: string
 
-  @Column()
+  @Column({ type: 'bigint' })
   energiaCompensadaQuantidade?: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaCompensadaPrecoUnidade?: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaCompensadaValor?: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaSCEEUnidade?: string
 
-  @Column()
+  @Column({ type: 'bigint' })
   energiaSCEEQuantidade?: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaSCEEPrecoUnidade?: number
 
-  @Column()
+  @Column({ type: 'float' })
   energiaSCEEValor?: number
 
-  @Column()
+  @Column({ type: 'float' })
   contribIlumPublicaMunicipalValor: number
 }
 

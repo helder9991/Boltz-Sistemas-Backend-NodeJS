@@ -75,6 +75,21 @@ describe('List Faturas By Instalacoes E2E', () => {
     expect(body.qntItens).toBe(2)
   })
 
+  it('Deve ser capaz de filtrar as faturas a partir do mes', async () => {
+    const response = await request(app)
+      .get('/fatura/historico')
+      .query({ idInstalacao, data: '06/01/2023' })
+
+    const body: IListByInstalacaoControllerResponse =
+      response.body as IListByInstalacaoControllerResponse
+
+    expect(response.status).toBe(200)
+    body.faturas.forEach((fatura: Fatura) => {
+      expect(fatura).toHaveProperty('id')
+    })
+    expect(body.qntItens).toBe(1)
+  })
+
   it('Nao deve ser capaz de listar as faturas a partir de um idInstalacao nao existente', async () => {
     let response = await request(app)
       .get('/fatura/historico')

@@ -8,6 +8,7 @@ import AppError from 'utils/AppError'
 interface IListFaturaByInstalacaoParams {
   idInstalacao: string
   pagina?: number
+  data?: Date
 }
 
 @injectable()
@@ -20,6 +21,7 @@ class ListFaturasByInstalacaoUseCase {
   async execute({
     idInstalacao,
     pagina,
+    data,
   }: IListFaturaByInstalacaoParams): Promise<[Fatura[], QntItensSalvos]> {
     const instalacaoExiste = await this.faturaRepository.find({
       idInstalacao,
@@ -31,6 +33,7 @@ class ListFaturasByInstalacaoUseCase {
     const faturas = await this.faturaRepository.listByInstalacao({
       idInstalacao,
       pagina,
+      data,
     })
 
     return faturas

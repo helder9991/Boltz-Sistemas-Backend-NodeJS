@@ -69,6 +69,16 @@ describe('ListFaturasByInstalacao', () => {
     expect(qntItensSalvos).toBe(2)
   })
 
+  it('Deve ser capaz de filtrar as faturas a partir do mes', async () => {
+    const [faturas, qntItensSalvos] = await listFaturasByInstalacao.execute({
+      idInstalacao,
+      data: new Date('06/01/2023'),
+    })
+
+    expect(faturas.every((fatura) => fatura instanceof Fatura)).toBe(true)
+    expect(qntItensSalvos).toBe(1)
+  })
+
   it('Nao deve ser capaz de listar as faturas a partir de um idInstalacao nao existente', async () => {
     await expect(
       listFaturasByInstalacao.execute({

@@ -1,12 +1,13 @@
 import crypto from 'crypto'
 import type IFaturaRepository from '../interfaces/IFaturaRepository'
-import { type Repository } from 'typeorm'
+import { Between, type Repository } from 'typeorm'
 import typeORMConnection from 'database/typeorm'
 import Fatura from '../../entities/Fatura'
 import type IUploadFaturaDTO from '../../dtos/IUploadFaturaDTO'
 import type IFindFaturaDTO from 'modules/fatura/dtos/IFindFaturaDTO'
 import type IListFaturaByInstalacaoDTO from 'modules/fatura/dtos/IListFaturaByInstalacaoDTO'
 import { type QntItensSalvos } from '../interfaces/IFaturaRepository'
+import { limitesDoMes } from 'utils/data'
 
 const FaturasPorPagina = 6
 
@@ -43,12 +44,19 @@ class FaturaRepository implements IFaturaRepository {
   async listByInstalacao({
     idInstalacao,
     pagina = 1,
+    data,
   }: IListFaturaByInstalacaoDTO): Promise<[Fatura[], QntItensSalvos]> {
+    const whereClause: any = { idInstalacao }
+
+    if (data !== undefined) {
+      // Se a data for fornecida, filtra pelo mês referência
+      const { inicio, fim } = limitesDoMes(data)
+      whereClause.mesReferencia = Between(inicio, fim)
+    }
+
     const faturas = await this.repository.findAndCount({
       select: ['id', 'mesReferencia', 'mesVencimento', 'total'],
-      where: {
-        idInstalacao,
-      },
+      where: whereClause,
       order: {
         mesReferencia: 'DESC',
       },

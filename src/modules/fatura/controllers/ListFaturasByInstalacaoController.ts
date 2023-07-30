@@ -14,6 +14,7 @@ export interface IListByInstalacaoControllerResponse {
 interface IQueryRequest extends ParsedQs {
   idInstalacao: string
   pagina?: string
+  data?: string
 }
 
 class ListFaturasByInstalacaoController {
@@ -23,6 +24,7 @@ class ListFaturasByInstalacaoController {
     this.schema = Yup.object().shape({
       idInstalacao: Yup.string().uuid().required(),
       pagina: Yup.number().positive(),
+      data: Yup.date(),
     })
   }
 
@@ -30,9 +32,9 @@ class ListFaturasByInstalacaoController {
     req: Request,
     res: Response,
   ): Promise<Response<IListByInstalacaoControllerResponse>> {
-    const { idInstalacao, pagina } = req.query as IQueryRequest
+    const { idInstalacao, pagina, data } = req.query as IQueryRequest
 
-    if (!(await this.schema.isValid({ idInstalacao, pagina })))
+    if (!(await this.schema.isValid({ idInstalacao, pagina, data })))
       throw new AppError('Validation Fails', 400)
 
     const listFaturasByInstalacaoUseCase: ListFaturasByInstalacaoUseCase =
@@ -41,6 +43,7 @@ class ListFaturasByInstalacaoController {
     const [faturas, qntItens] = await listFaturasByInstalacaoUseCase.execute({
       idInstalacao,
       pagina: pagina !== undefined ? Number(pagina) : undefined,
+      data: data !== undefined ? new Date(data) : undefined,
     })
 
     return res.status(200).json({ faturas, qntItens })

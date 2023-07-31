@@ -22,6 +22,7 @@ describe('ListFaturasByInstalacao', () => {
       instalacaoRepository = new InstalacaoRepository()
       listFaturasByInstalacao = new ListFaturasByInstalacaoUseCase(
         faturaRepository,
+        instalacaoRepository,
       )
       uploadFatura = new UploadFaturaUseCase(
         faturaRepository,

@@ -4,6 +4,7 @@ import IFaturaRepository, {
 } from 'modules/fatura/repository/interfaces/IFaturaRepository'
 import type Fatura from 'modules/fatura/entities/Fatura'
 import AppError from 'utils/AppError'
+import IInstalacaoRepository from 'modules/instalacao/repository/interface/IInstalacaoRepository'
 
 interface IListFaturaByInstalacaoParams {
   idInstalacao: string
@@ -16,6 +17,8 @@ class ListFaturasByInstalacaoUseCase {
   constructor(
     @inject('FaturaRepository')
     private readonly faturaRepository: IFaturaRepository,
+    @inject('InstalacaoRepository')
+    private readonly instalacaoRepository: IInstalacaoRepository,
   ) {}
 
   async execute({
@@ -23,8 +26,8 @@ class ListFaturasByInstalacaoUseCase {
     pagina,
     data,
   }: IListFaturaByInstalacaoParams): Promise<[Fatura[], QntItensSalvos]> {
-    const instalacaoExiste = await this.faturaRepository.find({
-      idInstalacao,
+    const instalacaoExiste = await this.instalacaoRepository.find({
+      id: idInstalacao,
     })
 
     if (instalacaoExiste === null)

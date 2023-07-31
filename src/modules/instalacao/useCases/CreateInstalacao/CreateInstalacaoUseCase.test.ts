@@ -37,9 +37,8 @@ describe('CreateInstalacao', () => {
 
     await createInstalacao.execute(instalacaoInfo)
 
-    expect(createInstalacao.execute(instalacaoInfo)).rejects.toHaveProperty(
-      'message',
-      'Esta instalacao ja existe.',
-    )
+    await expect(
+      createInstalacao.execute(instalacaoInfo),
+    ).rejects.toHaveProperty('message', 'Esta instalacao ja existe.')
   })
 })

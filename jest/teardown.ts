@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import typeORMConnection from '../src/database/typeorm'
 
 const dbFilePath = path.join(
   path.resolve(__dirname, '..', 'src', 'database'),
@@ -13,6 +14,7 @@ export default async (): Promise<void> => {
       fs.unlinkSync(dbFilePath)
       console.log('Arquivo db.sqlite removido com sucesso!')
     }
+    if (typeORMConnection.isInitialized) typeORMConnection.destroy()
   } catch (error) {
     console.error('Erro ao remover o arquivo db.sqlite:', error)
   }

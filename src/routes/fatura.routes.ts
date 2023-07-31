@@ -4,7 +4,6 @@ import removeFileOnError from 'middlewares/removeFileOnError'
 import DashboardFaturaController from 'modules/fatura/controllers/DashboardFaturaController'
 import DownloadFaturaController from 'modules/fatura/controllers/DownloadFaturaController'
 import ListFaturasByInstalacaoController from 'modules/fatura/controllers/ListFaturasByInstalacaoController'
-import ShowFaturaController from 'modules/fatura/controllers/ShowFaturaController'
 import UploadFaturaController from 'modules/fatura/controllers/UploadFaturaController'
 
 const faturaRoutes = Router()
@@ -22,10 +21,6 @@ faturaRoutes.get('/download/:id', (req: Request, res: Response) =>
 
 faturaRoutes.get('/historico', (req: Request, res: Response) =>
   ListFaturasByInstalacaoController.handle(req, res),
-)
-
-faturaRoutes.get('/historico/:id', (req: Request, res: Response) =>
-  ShowFaturaController.handle(req, res),
 )
 
 faturaRoutes.get('/dashboard', (req: Request, res: Response) =>

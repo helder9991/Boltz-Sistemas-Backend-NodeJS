@@ -72,8 +72,8 @@ class FaturaRepository implements IFaturaRepository {
 
   async dashboard(): Promise<IDashboard> {
     const query1 = await typeORMConnection.query(`
-      SELECT SUM(total) valorTotal, SUM("energiaEletricaValor") energiaEletricaValorTotal, SUM("energiaInjetadaValor") energiaInjetadaValorTotal, 
-      SUM("contribIlumPublicaMunicipalValor") contribIlumPublicaMunicipalValorTotal
+      SELECT SUM(total) valortotal, SUM("energiaEletricaValor") energiaeletricavalortotal, SUM("energiaInjetadaValor") energiainjetadavalortotal, 
+      SUM("contribIlumPublicaMunicipalValor") contribilumpublicamunicipalvalortotal
       FROM faturas;
     `)
     const query2 = await typeORMConnection.query(`
@@ -95,24 +95,23 @@ class FaturaRepository implements IFaturaRepository {
 
     const query3 = await typeORMConnection.query(
       `
-      SELECT ${truncaData}(${formataData}, "mesReferencia") mesReferencia, SUM("energiaEletricaValor") energiaEletricaValor, 
-        SUM("energiaInjetadaValor") energiaInjetadaValor, SUM("enCompSemICMSValor") enCompSemICMSValor, 
-        SUM("contribIlumPublicaMunicipalValor") contribIlumPublicaMunicipalValor 
+      SELECT ${truncaData}(${formataData}, "mesReferencia") mesreferencia, SUM("energiaEletricaValor") energiaeletricavalor, 
+        SUM("energiaInjetadaValor") energiainjetadavalor, SUM("enCompSemICMSValor") encompsemicmsvalor, 
+        SUM("contribIlumPublicaMunicipalValor") contribilumpublicamunicipalvalor 
       FROM faturas
       WHERE "mesReferencia" BETWEEN '${seteMesesAtras.toISOString()}' AND '${dataAtual.toISOString()}'
       GROUP BY ${truncaData}(${formataData}, "mesReferencia")
       ORDER BY ${truncaData}(${formataData}, "mesReferencia");
     `,
     )
-
     const dashboard: IDashboard = {
       qntUC: Number(query2[0].numinstalacao),
       resumo7meses: query3.map((row: any) => ({
-        mesReferencia: row.mesReferencia,
-        energiaEletricaValor: row.energiaEletricaValor,
-        energiaInjetadaValor: row.energiaInjetadaValor,
-        enCompSemICMSValor: row.enCompSemICMSValor,
-        contribIlumPublicaMunicipalValor: row.contribIlumPublicaMunicipalValor,
+        mesReferencia: row.mesreferencia,
+        energiaEletricaValor: row.energiaeletricavalor,
+        energiaInjetadaValor: row.energiainjetadavalor,
+        enCompSemICMSValor: row.encompsemicmsvalor,
+        contribIlumPublicaMunicipalValor: row.contribilumpublicamunicipalvalor,
       })),
       valorTotal: query1[0].valortotal,
       totalEnergiaEletrica: query1[0].energiaeletricavalortotal,
@@ -120,6 +119,7 @@ class FaturaRepository implements IFaturaRepository {
       totalContribIlumPublicaMunicipal:
         query1[0].contribilumpublicamunicipalvalortotal,
     }
+
     return dashboard
   }
 }

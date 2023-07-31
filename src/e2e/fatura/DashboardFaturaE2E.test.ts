@@ -41,7 +41,12 @@ describe('Dashboard Fatura E2E', () => {
           mesReferencia: '06/2023',
         },
       ],
+      totalContribIlumPublicaMunicipal: 77.11,
+      totalEnergiaEletrica: 166.2,
+      totalEnergiaInjetada: -623.08,
+      valorTotal: 287.56,
     })
+
     expect(response.status).toBe(200)
   })
 })

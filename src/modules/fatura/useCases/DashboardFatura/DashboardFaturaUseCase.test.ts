@@ -58,10 +58,10 @@ describe('Dashboard Fatura', () => {
           contribIlumPublicaMunicipalValor: 41.19,
         },
       ],
-      valorTotal: undefined,
-      totalEnergiaEletrica: undefined,
-      totalEnergiaInjetada: undefined,
-      totalContribIlumPublicaMunicipal: undefined,
+      valorTotal: 287.56,
+      totalEnergiaEletrica: 166.2,
+      totalEnergiaInjetada: -623.08,
+      totalContribIlumPublicaMunicipal: 77.11,
     })
   })
 })

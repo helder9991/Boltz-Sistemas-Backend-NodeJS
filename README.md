@@ -30,6 +30,10 @@ Siga os passos abaixo para utilizar o projeto:
 
 5. Rode o seguinte comando na pasta raiz do projeto para iniciar o backend:
    - ```yarn dev:server```
+
+## Rotas
+  - Dentro do projeto existe um arquivo de documentação da API desenvolvido no Postman chamado: *Boltz Sistemas.postman_collection.json*. 
+
 ## Testes
 O projeto inclui testes unitários e end-to-end para garantir o correto funcionamento e a qualidade do código. Para executar os testes, utilize o seguinte comando:    
    - ```yarn test```

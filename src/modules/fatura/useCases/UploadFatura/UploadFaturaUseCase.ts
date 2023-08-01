@@ -1,12 +1,12 @@
 import fs from 'fs'
 import { inject, injectable } from 'tsyringe'
 import PDFParser from 'pdf-parse'
-import type IUploadFaturaDTO from 'modules/fatura/dtos/UploadFaturaDTO'
 import IFaturaRepository from 'modules/fatura/repository/interfaces/IFaturaRepository'
 import formataDataParaJSDate from 'utils/formataDataParaJSDate'
 import IInstalacaoRepository from 'modules/instalacao/repository/interface/IInstalacaoRepository'
 import type Fatura from 'modules/fatura/entities/Fatura'
 import AppError from 'utils/AppError'
+import type IUploadFaturaDTO from 'modules/fatura/dtos/IUploadFaturaDTO'
 
 interface IUploadFaturaParams {
   filepath: string

@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "f207f1e4-002f-4dc1-a918-d8969431c5f7",
+		"name": "Boltz Sistemas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12036505"
+	},
+	"item": [
+		{
+			"name": "Fatura",
+			"item": [
+				{
+					"name": "Upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/helde/Downloads/Faturas-20230726T012328Z-001/Faturas/3004298116-05-2023.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base}}/fatura/upload",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"fatura",
+								"upload"
+							]
+						},
+						"description": "StartFragment\n\nEsta rota permite que o usuário envie uma fatura de energia elétrica em formato PDF para processamento no sistema. O PDF deve conter todas as informações relevantes da fatura, incluindo o nome do cliente, mês de referência, data de vencimento, consumo de energia (kWh), valor total da fatura, entre outros detalhes.\n\nEndFragment"
+					},
+					"response": [
+						{
+							"name": "Upload",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/helde/Downloads/Faturas-20230726T012328Z-001/Faturas/3004298116-05-2023.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:3333/fatura/upload",
+									"host": [
+										"localhost"
+									],
+									"port": "3333",
+									"path": [
+										"fatura",
+										"upload"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "800"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"320-e/l90Sf4QusM440jCv3VnggAOc4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 Jul 2023 23:50:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"dbcd87dd-0328-45c7-b815-76112d98d1c4\",\n    \"idInstalacao\": \"1142f517-692b-4f5d-8429-992938bc185c\",\n    \"filepath\": \"/home/helder/Documents/Code/lumi/backend/src/assets/37745452-7699-4852-86c2-9a75bf0b7e7b-1690847436001.pdf\",\n    \"total\": 158.17,\n    \"mesReferencia\": \"2023-05-01T03:00:00.000Z\",\n    \"mesVencimento\": \"2023-06-12T03:00:00.000Z\",\n    \"energiaEletricaUnidade\": \"kWh\",\n    \"energiaEletricaQuantidade\": 100,\n    \"energiaEletricaPrecoUnidade\": 0.83833281,\n    \"energiaEletricaValor\": 83.81,\n    \"energiaInjetadaUnidade\": \"kWh\",\n    \"energiaInjetadaQuantidade\": 21,\n    \"energiaInjetadaPrecoUnidade\": 0.65313,\n    \"energiaInjetadaValor\": -732.15,\n    \"enCompSemICMSUnidade\": \"kWh\",\n    \"enCompSemICMSQuantidade\": 21,\n    \"enCompSemICMSPrecoUnidade\": 0.6874329,\n    \"enCompSemICMSValor\": 770.59,\n    \"contribIlumPublicaMunicipalValor\": 35.92,\n    \"numCliente\": 7202788969,\n    \"numInstalacao\": 3004298116\n}"
+						}
+					]
+				},
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/fatura/download/9ac8df1d-e061-4284-9a11-f7088ed5b205",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"fatura",
+								"download",
+								"9ac8df1d-e061-4284-9a11-f7088ed5b205"
+							]
+						},
+						"description": "StartFragment\n\nEsta rota permite que o usuário realize o download de uma fatura de energia elétrica previamente cadastrada no sistema com base em seu ID. O arquivo da fatura será disponibilizado para download em formato PDF, contendo todas as informações detalhadas, como o nome do cliente, mês de referência, data de vencimento, consumo de energia (kWh), valor total da fatura, entre outros.\n\nEndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "List Fatura By Instalacao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/fatura/historico?idInstalacao=18cab31e-2e9f-4905-9572-822a7cc83b64",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"fatura",
+								"historico"
+							],
+							"query": [
+								{
+									"key": "pagina",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "idInstalacao",
+									"value": "18cab31e-2e9f-4905-9572-822a7cc83b64"
+								},
+								{
+									"key": "data",
+									"value": "03/04/2023",
+									"disabled": true
+								}
+							]
+						},
+						"description": "StartFragment\n\nEsta rota permite que o usuário liste todas as faturas de energia elétrica associadas a uma instalação específica com base em seu ID de instalação. Além disso, é possível aplicar filtros adicionais para realizar uma busca mais específica, incluindo a paginação dos resultados e a filtragem por mês de referência das faturas.\n\nEndFragment"
+					},
+					"response": [
+						{
+							"name": "List Fatura By Instalacao",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/fatura/historico?pagina=1&idInstalacao=1142f517-692b-4f5d-8429-992938bc185c",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"fatura",
+										"historico"
+									],
+									"query": [
+										{
+											"key": "pagina",
+											"value": "1"
+										},
+										{
+											"key": "idInstalacao",
+											"value": "1142f517-692b-4f5d-8429-992938bc185c"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "467"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d3-WxPz3dBMYLAkhHE+xngoiX+KuNM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Aug 2023 02:40:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"faturas\": [\n        {\n            \"id\": \"34f3596d-0e7a-4552-a8cd-a1622c1af38a\",\n            \"total\": 147.52,\n            \"mesReferencia\": \"2023-06-01T03:00:00.000Z\",\n            \"mesVencimento\": \"2023-07-12T03:00:00.000Z\"\n        },\n        {\n            \"id\": \"dbcd87dd-0328-45c7-b815-76112d98d1c4\",\n            \"total\": 158.17,\n            \"mesReferencia\": \"2023-05-01T03:00:00.000Z\",\n            \"mesVencimento\": \"2023-06-12T03:00:00.000Z\"\n        },\n        {\n            \"id\": \"79567fdf-d9c3-4237-bb67-4ce5e276ab1f\",\n            \"total\": 140.04,\n            \"mesReferencia\": \"2023-01-01T03:00:00.000Z\",\n            \"mesVencimento\": \"2023-02-06T03:00:00.000Z\"\n        }\n    ],\n    \"qntItens\": 3\n}"
+						}
+					]
+				},
+				{
+					"name": "Dashboard Fatura",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/fatura/dashboard",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"fatura",
+								"dashboard"
+							]
+						},
+						"description": "StartFragment\n\nEsta rota permite que o usuário obtenha informações detalhadas sobre todas as faturas de energia elétrica que foram previamente cadastradas no banco de dados do sistema. As informações incluem dados como mês de referência, consumo de energia (kWh), valor total da fatura, entre outros detalhes.\n\nEndFragment"
+					},
+					"response": [
+						{
+							"name": "Dashboard Fatura",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/fatura/dashboard",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"fatura",
+										"dashboard"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1200"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4b0-BNIvC+ETEHrhw/22z+5EYn3RA24\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 Jul 2023 05:40:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"qntUC\": 4,\n    \"resumo7meses\": [\n        {\n            \"mesReferencia\": \"2023-01-01T00:00:00.000Z\",\n            \"energiaEletricaValor\": 74.84,\n            \"energiaInjetadaValor\": -623.08,\n            \"enCompSemICMSValor\": 652.36,\n            \"contribIlumPublicaMunicipalValor\": 35.92\n        },\n        {\n            \"mesReferencia\": \"2023-02-01T00:00:00.000Z\",\n            \"energiaEletricaValor\": 83.38,\n            \"energiaInjetadaValor\": -811.84,\n            \"enCompSemICMSValor\": 850,\n            \"contribIlumPublicaMunicipalValor\": 35.92\n        },\n        {\n            \"mesReferencia\": \"2023-03-01T00:00:00.000Z\",\n            \"energiaEletricaValor\": 83.38,\n            \"energiaInjetadaValor\": -91.38,\n            \"enCompSemICMSValor\": 42.68,\n            \"contribIlumPublicaMunicipalValor\": 35.92\n        },\n        {\n            \"mesReferencia\": \"2023-04-01T00:00:00.000Z\",\n            \"energiaEletricaValor\": 83.39,\n            \"energiaInjetadaValor\": -810.53,\n            \"enCompSemICMSValor\": 848.71,\n            \"contribIlumPublicaMunicipalValor\": 35.92\n        },\n        {\n            \"mesReferencia\": \"2023-05-01T00:00:00.000Z\",\n            \"energiaEletricaValor\": 167.62,\n            \"energiaInjetadaValor\": -1464.3,\n            \"enCompSemICMSValor\": 770.59,\n            \"contribIlumPublicaMunicipalValor\": 71.84\n        },\n        {\n            \"mesReferencia\": \"2023-06-01T00:00:00.000Z\",\n            \"energiaEletricaValor\": 91.36,\n            \"energiaInjetadaValor\": null,\n            \"enCompSemICMSValor\": null,\n            \"contribIlumPublicaMunicipalValor\": 41.19\n        }\n    ],\n    \"valorTotal\": 1093.29,\n    \"totalEnergiaEletrica\": 583.97,\n    \"totalEnergiaInjetada\": -3801.13,\n    \"totalContribIlumPublicaMunicipal\": 256.71000000000004\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Instalacoes",
+			"item": [
+				{
+					"name": "List Instalacoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/instalacao",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"instalacao"
+							]
+						},
+						"description": "StartFragment\n\nEsta rota permite que o usuário obtenha uma lista de todas as instalações de energia elétrica previamente cadastradas no banco de dados do sistema. Essa lista pode ser utilizada para preencher um dropdown ou uma lista suspensa, permitindo que o usuário selecione facilmente uma instalação específica para realizar ações relacionadas às faturas.\n\nEndFragment"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

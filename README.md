@@ -18,7 +18,7 @@ Siga os passos abaixo para utilizar o projeto:
 2. Altere o nome do arquivo `.env.example` para `.env` e coloque os seguintes dados:
    - `API_PORT`: Porta na qual a API rodará.
    - `DB_HOST`: Host utilizado para acessar o banco de dados (caso utilize o Docker Compose, será "localhost").
-   - `DB_DATABASE`: Nome do banco de dados (caso utilize o Docker Compose, será "social").
+   - `DB_DATABASE`: Nome do banco de dados (caso utilize o Docker Compose, será "energy").
    - `DB_USER`: Usuário ADM que terá acesso ao banco (caso utilize o Docker Compose, será "root").
    - `DB_PASSWORD`: Senha do usuário (caso utilize o Docker Compose, será "docker").
 

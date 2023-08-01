@@ -1,9 +1,10 @@
 import { Router } from 'express'
+import faturaRoutes from './fatura.routes'
+import instalacaoRoutes from './instalacao.routes'
 
 const routes = Router()
 
-routes.get('/', (req, res) => {
-  res.status(200).json({ ok: true })
-})
+routes.use('/fatura', faturaRoutes)
+routes.use('/instalacao', instalacaoRoutes)
 
 export default routes

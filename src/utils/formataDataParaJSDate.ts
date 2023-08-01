@@ -38,7 +38,7 @@ const formataDataParaJSDate = (data: string): Date => {
 
     // O construtor Date aceita o formato ano-mês-dia
     // Porém, os meses em Date são baseados em zero, então subtraímos 1 do valor do mês
-    const jsDate = new Date(`${year}-${parseInt(month, 10) - 1}-${day}`)
+    const jsDate = new Date(`${year}-${parseInt(month)}-${day}`)
 
     return jsDate
   }
